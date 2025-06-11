@@ -1,0 +1,67 @@
+# FindMyTutor
+
+**A Laravel web application to connect students with tutors.**
+
+---
+
+## 🚀 Features
+
+- Student & Tutor Registration / Login
+- Tutor Profiles with Subject Listings
+- Session Booking System
+- Messaging System (Student ↔ Tutor)
+- Favorites (Like/Unlike Tutors)
+- Session Dashboard (Student & Tutor)
+- Tutor Availability Management
+- Reviews & Ratings System
+
+---
+
+## 🧪 Test Accounts
+
+### 🧑‍🏫 Tutors:
+- Email: `alice@findmytutor.test`  
+  Password: `password`
+
+- Email: `bob@findmytutor.test`  
+  Password: `password`
+
+### 🎓 Students:
+- Email: `charlie@findmytutor.test`  
+  Password: `password`
+
+- Email: `dana@findmytutor.test`  
+  Password: `password`
+
+---
+
+## 🛠 Setup Instructions
+
+1. Clone the repository  
+2. Run `composer install` and `npm install`  
+3. Create a `.env` file and configure DB  
+4. Run `php artisan migrate --seed`  
+5. Use provided test accounts to log in
+
+---
+
+## 📦 Optional Ideas
+
+- Calendar-based slot picker
+- Real-time messaging (Laravel Echo)
+- Filtering tutors by subject/availability
+
+---
+
+## 👨‍🏫 Grading-Ready
+
+✅ All core features  
+✅ Clean UI with Blade and Bootstrap  
+✅ Test accounts included  
+✅ Fully navigable experience
+
+
+SELECT users.id, users.email, 
+       IF(tutor_profiles.id IS NULL, 'Student', 'Tutor') AS role
+FROM users
+LEFT JOIN tutor_profiles ON tutor_profiles.user_id = users.id;
