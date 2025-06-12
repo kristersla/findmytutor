@@ -29,7 +29,7 @@ class TutorController extends Controller
         }
 
         $tutors = $query->paginate(10);
-        $subjects = Subject::all();
+        $subjects = Subject::whereHas('tutorProfiles')->get();
 
         return view('tutors.index', compact('tutors', 'subjects'));
     }
@@ -51,6 +51,8 @@ class TutorController extends Controller
         $request->validate([
             'bio' => 'required|string|max:1000',
             'hourly_rate' => 'required|numeric|min:0',
+            'location' => 'required|string|max:255',
+            'contact_method' => 'required|string|max:255',
             'subject_name' => 'required|string|max:255',
         ]);
 
@@ -68,6 +70,7 @@ class TutorController extends Controller
         return redirect()->route('availability.index')->with('success', 'Tutor profile created! Now add your available time slots.');
     }
 
+
     public function showBySubject($subjectName)
     {
         $subject = Subject::where('name', $subjectName)->firstOrFail();
@@ -78,4 +81,27 @@ class TutorController extends Controller
 
         return view('tutors.by_subject', compact('subject', 'tutors'));
     }
+
+    public function updateTutorInfo(Request $request)
+    {
+        $request->validate([
+            'bio' => 'nullable|string|max:1000',
+            'hourly_rate' => 'nullable|numeric|min:0',
+            'location' => 'nullable|string|max:255',
+            'contact_method' => 'nullable|string|max:255',
+            'subject_name' => 'nullable|string|max:255',
+        ]);
+
+        $tutor = \App\Models\TutorProfile::where('user_id', auth()->id())->firstOrFail();
+
+        if ($request->filled('subject_name')) {
+            $subject = \App\Models\Subject::firstOrCreate(['name' => $request->subject_name]);
+            $tutor->subject_id = $subject->id;
+        }
+
+        $tutor->update($request->only('bio', 'hourly_rate', 'location', 'contact_method'));
+
+        return redirect()->back()->with('success', 'Tutor profile updated successfully.');
+    }
+
 }

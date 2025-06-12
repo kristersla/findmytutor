@@ -10,7 +10,16 @@ use App\Models\Subject;
 class TutorProfile extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'bio', 'availability', 'location', 'contact_method', 'subject_id'];
+    protected $fillable = [
+        'user_id',
+        'bio',
+        'availability',
+        'location',
+        'contact_method',
+        'subject_id',
+        'hourly_rate',
+    ];
+
 
 
     public function user()
@@ -41,10 +50,6 @@ class TutorProfile extends Model
     public function sessions()
     {
         return $this->hasMany(\App\Models\Session::class, 'tutor_profile_id');
-    }
-    public function subjects()
-    {
-        return $this->belongsToMany(Subject::class);
     }
 
 }

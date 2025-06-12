@@ -10,11 +10,12 @@
 
             <!-- Center: Navigation Links -->
             <div class="hidden md:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
-                <x-nav-link :href="route('sessions.dashboard')" :active="request()->routeIs('sessions.dashboard')">
-                    {{ __('My Sessions') }}
-                </x-nav-link>
+                
                 <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                     {{ __('Dashboard') }}
+                </x-nav-link>
+                <x-nav-link :href="route('tutors.index')" :active="request()->routeIs('tutors.index')">
+                    {{ __('Tutors') }}
                 </x-nav-link>
                 <x-nav-link :href="route('messages.index')" :active="request()->routeIs('messages.index')">
                     {{ __('My Messages') }}
@@ -26,9 +27,6 @@
                         </x-nav-link>
                     @endif
                 @endauth
-                <x-nav-link :href="route('tutors.index')" :active="request()->routeIs('tutors.index')">
-                    {{ __('Tutors') }}
-                </x-nav-link>
                 @auth
                     @if (!Auth::user()->tutorProfile)
                         <x-nav-link :href="route('tutor.become')">
@@ -36,6 +34,9 @@
                         </x-nav-link>
                     @endif
                 @endauth
+                <x-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
+                    {{ __('My Profile') }}
+                </x-nav-link>
             </div>
 
             <!-- Right side: Profile dropdown -->
@@ -80,32 +81,32 @@
     <!-- Responsive Nav Menu (Mobile) -->
     <div :class="{ 'block': open, 'hidden': ! open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('sessions.dashboard')" :active="request()->routeIs('sessions.dashboard')">
-                {{ __('My Sessions') }}
-            </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('tutors.index')" :active="request()->routeIs('tutors.index')">
+                {{ __('Tutors') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('messages.index')" :active="request()->routeIs('messages.index')">
                 {{ __('My Messages') }}
             </x-responsive-nav-link>
-           @auth
-                    @if (Auth::user()->tutorProfile)
+            @auth
+                @if (Auth::user()->tutorProfile)
                         <x-nav-link :href="route('availability.index')" :active="request()->routeIs('availability.index')">
                             {{ __('My Availability') }}
                         </x-nav-link>
                     @endif
                 @endauth
-            <x-responsive-nav-link :href="route('tutors.index')" :active="request()->routeIs('tutors.index')">
-                {{ __('Tutors') }}
-            </x-responsive-nav-link>
             @auth
-                @if (!Auth::user()->tutorProfile)
-                    <x-responsive-nav-link :href="route('tutor.become')">
-                        {{ __('Become a Tutor') }}
-                    </x-responsive-nav-link>
-                @endif
+            @if (!Auth::user()->tutorProfile)
+                <x-responsive-nav-link :href="route('tutor.become')">
+                    {{ __('Become a Tutor') }}
+                </x-responsive-nav-link>
+            @endif
             @endauth
+            <x-responsive-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
+                {{ __('My Profile') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Mobile Profile Settings -->

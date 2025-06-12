@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\TutorProfile;
 
 class Subject extends Model
 {
@@ -13,6 +14,6 @@ class Subject extends Model
 
     public function tutorProfiles()
     {
-        return $this->belongsToMany(TutorProfile::class, 'subject_tutor_profile');
+        return $this->hasMany(TutorProfile::class);
     }
 }

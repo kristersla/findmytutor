@@ -27,19 +27,15 @@
                 </header>
             @endif
 
-            <main class="py-6">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    @yield('content')
-                </div>
+            <main>
+                @yield('content')
             </main>
 
         {{-- If the view uses <x-app-layout> and expects $slot --}}
         @else
             {{ $header ?? '' }}
-            <main class="py-6">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    {{ $slot ?? '' }}
-                </div>
+            <main>
+                {{ $slot ?? '' }}
             </main>
         @endif
     </div>

@@ -131,7 +131,7 @@
         z-index: 1;
     }
     .card:hover {
-        transform: translateY(-4px);
+        transform: translateY(-2px);
     }
 
     .card img {

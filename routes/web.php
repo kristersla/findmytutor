@@ -23,13 +23,7 @@ Route::get('/tutors/{id}', [TutorController::class, 'show'])->name('tutors.show'
 Route::get('/tutors/subject/{subject}', [TutorController::class, 'showBySubject'])->name('tutors.bySubject');
 
 // Dashboard
-Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
-
-Route::get('/dashboard/sessions', [SessionDashboardController::class, 'index'])
-    ->middleware(['auth'])
-    ->name('sessions.dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 // Auth-Protected Routes
 Route::middleware('auth')->group(function () {
@@ -84,6 +78,12 @@ Route::middleware('auth')->group(function () {
                 ];
             });
     });
+
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/profile/tutor-info', [TutorController::class, 'editTutorInfo'])->name('tutor.edit-info');
+        Route::patch('/profile/tutor-info', [TutorController::class, 'updateTutorInfo'])->name('tutor.update-info');
+    });
+
 
 });
 

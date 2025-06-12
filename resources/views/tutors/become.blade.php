@@ -94,9 +94,18 @@
 
         <div class="form-group">
             <label>Subject:</label>
-            <input type="text" name="subject_name" class="form-control" required>
+            <select name="subject_name" class="form-control" required>
+                <option value="">Select a subject</option>
+                <option value="math">Math</option>
+                <option value="literature">Literature</option>
+                <option value="writing">Writing</option>
+                <option value="culinary">Culinary</option>
+                <option value="biology">Biology</option>
+                <option value="chemistry">Chemistry</option>
+                <option value="physics">Physics</option>
+                <option value="geography">Geography</option>
+            </select>
         </div>
-
         <button type="submit" class="btn-submit">Create Tutor Profile</button>
     </form>
 </div>

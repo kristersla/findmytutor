@@ -16,8 +16,19 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        $user = $request->user();
+        $tutor = null;
+        $subjects = [];
+
+        if ($user->tutorProfile) {
+            $tutor = $user->tutorProfile()->with('subject')->first();
+            $subjects = \App\Models\Subject::all();
+        }
+
         return view('profile.edit', [
-            'user' => $request->user(),
+            'user' => $user,
+            'tutor' => $tutor,
+            'subjects' => $subjects,
         ]);
     }
 
@@ -57,4 +68,5 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+    
 }
