@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Subject;
+
 
 class TutorProfile extends Model
 {
@@ -13,7 +15,7 @@ class TutorProfile extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(\App\Models\User::class, 'user_id');
     }
 
     public function subject()
@@ -40,6 +42,9 @@ class TutorProfile extends Model
     {
         return $this->hasMany(\App\Models\Session::class, 'tutor_profile_id');
     }
-
+    public function subjects()
+    {
+        return $this->belongsToMany(Subject::class);
+    }
 
 }

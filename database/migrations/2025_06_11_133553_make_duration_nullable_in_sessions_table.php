@@ -12,15 +12,18 @@ return new class extends Migration
     public function up()
     {
         Schema::table('sessions', function (Blueprint $table) {
-            $table->dateTime('datetime')->nullable(); // or remove nullable if needed
+            $table->integer('duration')->nullable()->change();
         });
     }
 
-    public function down()
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
     {
         Schema::table('sessions', function (Blueprint $table) {
-            $table->dropColumn('datetime');
+            //
         });
     }
-
 };

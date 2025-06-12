@@ -12,7 +12,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('sessions', function (Blueprint $table) {
-            $table->dropColumn('duration');
+            
         });
     }
 

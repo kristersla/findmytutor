@@ -12,7 +12,6 @@ class TutorController extends Controller
     {
         $query = TutorProfile::with('user', 'subject');
 
-        // Apply search filters
         if ($request->filled('location')) {
             $query->where('location', 'like', '%' . $request->location . '%');
         }
@@ -43,7 +42,7 @@ class TutorController extends Controller
 
     public function create()
     {
-        $subjects = \App\Models\Subject::all();
+        $subjects = Subject::all();
         return view('tutors.become', compact('subjects'));
     }
 
@@ -55,9 +54,9 @@ class TutorController extends Controller
             'subject_name' => 'required|string|max:255',
         ]);
 
-        $subject = \App\Models\Subject::firstOrCreate(['name' => $request->subject_name]);
+        $subject = Subject::firstOrCreate(['name' => $request->subject_name]);
 
-        \App\Models\TutorProfile::create([
+        TutorProfile::create([
             'user_id' => auth()->id(),
             'bio' => $request->bio,
             'hourly_rate' => $request->hourly_rate,
@@ -66,11 +65,17 @@ class TutorController extends Controller
             'subject_id' => $subject->id,
         ]);
 
-
         return redirect()->route('availability.index')->with('success', 'Tutor profile created! Now add your available time slots.');
     }
 
+    public function showBySubject($subjectName)
+    {
+        $subject = Subject::where('name', $subjectName)->firstOrFail();
 
+        $tutors = TutorProfile::where('subject_id', $subject->id)
+            ->with('user')
+            ->get();
 
+        return view('tutors.by_subject', compact('subject', 'tutors'));
+    }
 }
-
