@@ -73,7 +73,7 @@
     @else
         @foreach ($tutors as $tutor)
             <div class="tutor-card">
-                <img src="{{ asset('images/user-icon.svg') }}" alt="Avatar" class="tutor-avatar">
+                <img src="{{ asset('images/user-icon.webp') }}" alt="Avatar" class="tutor-avatar">
                 <div class="tutor-info">
                     <h5>{{ $tutor->user->name }}</h5>
                     <p>{{ Str::limit($tutor->bio, 80) }}</p>

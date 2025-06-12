@@ -46,80 +46,118 @@
 </head>
 <body class="flex">
     <!-- LEFT: Landing Message -->
-    <div class="half left-side">
-        <h1>Welcome to FindMyTutor</h1>
-        <p>Discover expert tutors across subjects. Log in or sign up to book your first session and start learning today.</p>
+    <div class="w-full lg:w-1/2 flex flex-col justify-center items-center text-center px-6 lg:px-16 py-12 bg-gradient-to-br from-blue-100 to-blue-200">
+        <h1 class="text-4xl font-extrabold text-blue-900 mb-4 leading-tight">Welcome to <span class="text-blue-700">FindMyTutor</span></h1>
+        <p class="text-lg text-blue-800 mb-6 max-w-lg">Discover expert tutors across subjects. Log in or sign up to book your first session and start learning today.</p>
+        <!-- <img src="{{ asset('images/hero-img.svg') }}" alt="Hero Image" class="w-full max-w-md"> -->
     </div>
 
+
     <!-- RIGHT: Auth Forms -->
-    <div class="half right-side">
-        <div id="auth-container" class="auth-box">
+    <div class="half right-side flex justify-center items-center bg-white px-6 py-12">
+        <div id="auth-container" class="w-full max-w-md space-y-8">
+            {{-- Session Status --}}
             @if (session('status'))
-                <div class="mb-4 font-medium text-sm text-green-600">
+                <div class="text-sm text-green-600 font-medium text-center">
                     {{ session('status') }}
                 </div>
             @endif
 
-            <!-- Auth Toggle Buttons -->
-            <div class="mb-4 flex justify-center gap-4">
-                <button onclick="toggleAuth('login')" id="login-btn" class="text-blue-600 font-semibold">Login</button>
-                <button onclick="toggleAuth('register')" id="register-btn" class="text-gray-500">Register</button>
+            {{-- Login Form --}}
+            <div id="login-form" class="space-y-4">
+                <form method="POST" action="{{ route('login') }}" class="space-y-5">
+                    @csrf
+                    <div>
+                        <x-input-label for="email" :value="__('Email')" />
+                        <x-text-input id="email" type="email" name="email" :value="old('email')" required autofocus class="w-full" />
+                        <x-input-error :messages="$errors->get('email')" class="mt-1" />
+                    </div>
+
+                    <div>
+                        <x-input-label for="password" :value="__('Password')" />
+                        <x-text-input id="password" type="password" name="password" required class="w-full" />
+                        <x-input-error :messages="$errors->get('password')" class="mt-1" />
+                    </div>
+
+                    <x-primary-button class="w-full justify-center mt-4">
+                        {{ __('Log in') }}
+                    </x-primary-button>
+                </form>
+
+                <p class="text-center text-sm text-gray-500">
+                    Not registered yet?
+                    <button onclick="toggleAuth('register')" class="text-blue-600 hover:underline font-medium">
+                        Create an account
+                    </button>
+                </p>
             </div>
 
-            <!-- Login Form -->
-            <div id="login-form">
-                <form method="POST" action="{{ route('login') }}">
+            {{-- Register Form --}}
+            <div id="register-form" class="space-y-4 hidden">
+                <form method="POST" action="{{ route('register') }}" class="space-y-5">
                     @csrf
-                    <x-input-label for="email" :value="__('Email')" />
-                    <x-text-input id="email" type="email" name="email" :value="old('email')" required autofocus />
-                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
-
-                    <x-input-label for="password" :value="__('Password')" class="mt-4" />
-                    <x-text-input id="password" type="password" name="password" required />
-                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
-
-                    <div class="mt-4">
-                        <x-primary-button class="w-full">{{ __('Log in') }}</x-primary-button>
+                    <div>
+                        <x-input-label for="name" :value="__('Name')" />
+                        <x-text-input id="name" type="text" name="name" :value="old('name')" required autofocus class="w-full" />
+                        <x-input-error :messages="$errors->get('name')" class="mt-1" />
                     </div>
-                </form>
-            </div>
 
-            <!-- Register Form -->
-            <div id="register-form" style="display: none">
-                <form method="POST" action="{{ route('register') }}">
-                    @csrf
-                    <x-input-label for="name" :value="__('Name')" />
-                    <x-text-input id="name" type="text" name="name" :value="old('name')" required autofocus />
-                    <x-input-error :messages="$errors->get('name')" class="mt-2" />
-
-                    <x-input-label for="email" :value="__('Email')" class="mt-4" />
-                    <x-text-input id="email" type="email" name="email" :value="old('email')" required />
-                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
-
-                    <x-input-label for="password" :value="__('Password')" class="mt-4" />
-                    <x-text-input id="password" type="password" name="password" required />
-                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
-
-                    <x-input-label for="password_confirmation" :value="__('Confirm Password')" class="mt-4" />
-                    <x-text-input id="password_confirmation" type="password" name="password_confirmation" required />
-
-                    <div class="mt-4">
-                        <x-primary-button class="w-full">{{ __('Register') }}</x-primary-button>
+                    <div>
+                        <x-input-label for="email" :value="__('Email')" />
+                        <x-text-input id="email" type="email" name="email" :value="old('email')" required class="w-full" />
+                        <x-input-error :messages="$errors->get('email')" class="mt-1" />
                     </div>
+
+                    <div>
+                        <x-input-label for="password" :value="__('Password')" />
+                        <x-text-input id="password" type="password" name="password" required class="w-full" />
+                        <x-input-error :messages="$errors->get('password')" class="mt-1" />
+                    </div>
+
+                    <div>
+                        <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+                        <x-text-input id="password_confirmation" type="password" name="password_confirmation" required class="w-full" />
+                    </div>
+
+                    <x-primary-button class="w-full justify-center mt-4">
+                        {{ __('Register') }}
+                    </x-primary-button>
                 </form>
+
+                <p class="text-center text-sm text-gray-500">
+                    Already have an account?
+                    <button onclick="toggleAuth('login')" class="text-blue-600 hover:underline font-medium">
+                        Log in here
+                    </button>
+                </p>
             </div>
         </div>
     </div>
 
     <script>
         function toggleAuth(form) {
-            document.getElementById('login-form').style.display = form === 'login' ? 'block' : 'none';
-            document.getElementById('register-form').style.display = form === 'register' ? 'block' : 'none';
-            document.getElementById('login-btn').classList.toggle('text-blue-600', form === 'login');
-            document.getElementById('login-btn').classList.toggle('text-gray-500', form !== 'login');
-            document.getElementById('register-btn').classList.toggle('text-blue-600', form === 'register');
-            document.getElementById('register-btn').classList.toggle('text-gray-500', form !== 'register');
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            const loginBtn = document.getElementById('login-btn');
+            const registerBtn = document.getElementById('register-btn');
+
+            const active = 'bg-blue-600 text-white';
+            const inactive = 'bg-gray-200 text-gray-700';
+
+            if (form === 'login') {
+                loginForm.classList.remove('hidden');
+                registerForm.classList.add('hidden');
+                loginBtn.className = loginBtn.className.replace(inactive, active);
+                registerBtn.className = registerBtn.className.replace(active, inactive);
+            } else {
+                loginForm.classList.add('hidden');
+                registerForm.classList.remove('hidden');
+                registerBtn.className = registerBtn.className.replace(inactive, active);
+                loginBtn.className = loginBtn.className.replace(active, inactive);
+            }
         }
     </script>
+
+
 </body>
 </html>

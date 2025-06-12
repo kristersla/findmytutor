@@ -2,6 +2,11 @@
 
 @section('content')
 <style>
+    .hero-text{
+        text-align: center;
+        font-weight: 600;
+        font-size: 20px;
+    }
     .conversation-container {
         max-width: 700px;
         margin: 2rem auto;
@@ -28,7 +33,7 @@
 </style>
 
 <div class="conversation-container">
-    <h2 class="text-2xl font-bold mb-4 text-gray-800">Your Conversations</h2>
+    <h2 class="hero-text">Your Conversations</h2>
     <ul>
         @forelse ($contacts as $contact)
             @php

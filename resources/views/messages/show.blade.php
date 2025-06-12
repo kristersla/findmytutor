@@ -10,6 +10,11 @@
         padding: 2rem;
         box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
+    .hero-text{
+        text-align: center;
+        font-size: 20px;
+        padding-bottom: 10px;
+    }
     .chat-bubble {
         margin-bottom: 1rem;
         padding: 1rem;
@@ -37,6 +42,7 @@
         color: white;
         padding: 0.5rem 1rem;
         border: none;
+        width: 100%;
         border-radius: 0.375rem;
         transition: background 0.3s;
     }
@@ -46,7 +52,7 @@
 </style>
 
 <div class="chat-container">
-    <h2 class="text-2xl font-bold mb-4 text-gray-800">Conversation with {{ $contact->name }}</h2>
+    <h2 class="hero-text">Conversation with <span style="font-weight: 600;">{{ $contact->name }}</span></h2>
 
     <div class="mb-6">
         @foreach ($messages as $message)
@@ -62,8 +68,8 @@
 
     <form action="{{ route('messages.store', $contact->id) }}" method="POST" class="chat-form">
         @csrf
-        <textarea name="content" rows="3" required></textarea>
-        <button type="submit">Send</button>
+        <textarea name="content" rows="3" placeholder="Start typing here..." required></textarea>
+        <button type="submit">Send message</button>
     </form>
 </div>
 @endsection
