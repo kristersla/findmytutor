@@ -153,7 +153,7 @@
       padding: 10px;
       color: white;
       font-size: 25px;
-      font-weight: 600;
+      font-weight: 500;
       letter-spacing: 2px;
       text-transform: uppercase;
       text-align: center;
