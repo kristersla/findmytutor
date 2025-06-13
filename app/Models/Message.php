@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
-    public $timestamps = false; // We use `sent_at` instead
+    public $timestamps = false;
 
     protected $fillable = ['sender_user_id', 'receiver_user_id', 'content', 'sent_at', 'read_at'];
 

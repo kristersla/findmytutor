@@ -18,7 +18,6 @@ class SessionController extends Controller
             'notes' => 'nullable|string',
         ]);
 
-        // Check for bad words using Neutrino API
         if (!empty($validated['notes']) && $this->containsProfanity($validated['notes'])) {
             return back()->withErrors(['notes' => 'Please remove inappropriate language from your notes.'])->withInput();
         }

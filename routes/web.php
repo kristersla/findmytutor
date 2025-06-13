@@ -17,48 +17,38 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Public Tutor Routes
-Route::get('/tutors', [TutorController::class, 'index'])->name('tutors.index');
-Route::get('/tutors/{id}', [TutorController::class, 'show'])->name('tutors.show');
-Route::get('/tutors/subject/{subject}', [TutorController::class, 'showBySubject'])->name('tutors.bySubject');
-
-// Dashboard
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
-
-// Auth-Protected Routes
 Route::middleware('auth')->group(function () {
-    // Profile
+
+    Route::get('/tutors', [TutorController::class, 'index'])->name('tutors.index');
+    Route::get('/tutors/{id}', [TutorController::class, 'show'])->name('tutors.show');
+    Route::get('/tutors/subject/{subject}', [TutorController::class, 'showBySubject'])->name('tutors.bySubject');
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Favorites
     Route::post('/tutors/{tutorProfile}/favorite', [FavoriteTutorController::class, 'store'])->name('tutors.favorite');
     Route::delete('/tutors/{tutorProfile}/unfavorite', [FavoriteTutorController::class, 'destroy'])->name('tutors.unfavorite');
 
-    // Messages
     Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
     Route::get('/messages/{user}', [MessageController::class, 'show'])->name('messages.show');
     Route::post('/messages/{user}', [MessageController::class, 'store'])->name('messages.store');
 
-    // Availability
     Route::get('/availability', [AvailabilitySlotController::class, 'index'])->name('availability.index');
     Route::post('/availability', [AvailabilitySlotController::class, 'store'])->name('availability.store');
     Route::delete('/availability/{availabilitySlot}', [AvailabilitySlotController::class, 'destroy'])->name('availability.destroy');
 
-    // Reviews
     Route::post('/tutors/{tutor}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 
-    // Become a Tutor
     Route::get('/become-a-tutor', [TutorController::class, 'create'])->name('tutor.become');
     Route::post('/become-a-tutor', [TutorController::class, 'store'])->name('tutor.save');
 
-    // Session Actions (moved inside auth middleware group)
     Route::post('/sessions/{session}/approve', [SessionController::class, 'approve'])->name('sessions.approve');
     Route::post('/sessions/{session}/reject', [SessionController::class, 'reject'])->name('sessions.reject');
     Route::post('/sessions/{session}/cancel', [SessionController::class, 'cancel'])->name('sessions.cancel');
 
-    // Book a session
     Route::post('/sessions/book/{tutor}', [SessionController::class, 'book'])->name('sessions.book');
 
     Route::get('/tutor-suggestions', function (Request $request) {

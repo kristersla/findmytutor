@@ -11,8 +11,9 @@
         html, body {
             margin: 0;
             padding: 0;
-            font-family: 'Inter', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             display: flex;
+            width: 100%;
             flex-direction: row;
             height: 100vh;
         }
@@ -88,13 +89,11 @@
 </head>
 <body>
 
-    <!-- LEFT: Welcome Section -->
     <div class="left-side">
         <h1>Welcome to <span class="text-blue-700">FindMyTutor</span></h1>
         <p>Empower your learning journey. Connect with top tutors, unlock new skills, and take the first step toward your goals today.</p>
     </div>
 
-    <!-- RIGHT: Auth Forms -->
     <div class="right-side">
         <div id="auth-container" class="auth-box space-y-8">
 
@@ -104,7 +103,6 @@
                 </div>
             @endif
 
-            <!-- Login Form -->
             <div id="login-form" class="space-y-4">
                 <h1 class="auth-hero-text">Log in</h1>
                 <form method="POST" action="{{ route('login') }}" class="space-y-5">
@@ -134,7 +132,6 @@
                 </p>
             </div>
 
-            <!-- Register Form -->
             <div id="register-form" class="space-y-4 hidden">
                 <h1 class="auth-hero-text">Register account</h1>
                 <form method="POST" action="{{ route('register') }}" class="space-y-5">

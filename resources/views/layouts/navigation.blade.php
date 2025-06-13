@@ -1,14 +1,12 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <div class="w-full">
         <div class="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8 relative">
-            <!-- Left side: Logo -->
             <div class="flex items-center ms-4">
                 <a href="{{ route('dashboard') }}">
                     <img src="{{ asset('images/find mytutor.svg') }}" alt="FindMyTutor Logo" class="h-7 w-auto">
                 </a>
             </div>
 
-            <!-- Center: Navigation Links -->
             <div class="hidden md:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
                 
                 <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
@@ -39,7 +37,6 @@
                 </x-nav-link>
             </div>
 
-            <!-- Right side: Profile dropdown -->
             <div class="hidden sm:flex sm:items-center me-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -66,7 +63,6 @@
                 </x-dropdown>
             </div>
 
-            <!-- Hamburger for mobile -->
             <div class="-me-2 flex items-center sm:hidden">
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:bg-gray-100 focus:outline-none transition">
                     <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -78,7 +74,6 @@
         </div>
     </div>
 
-    <!-- Responsive Nav Menu (Mobile) -->
     <div :class="{ 'block': open, 'hidden': ! open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
@@ -109,7 +104,6 @@
             </x-responsive-nav-link>
         </div>
 
-        <!-- Mobile Profile Settings -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
                 <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>

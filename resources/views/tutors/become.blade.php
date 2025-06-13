@@ -14,7 +14,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 40px 20px; /* padding added for mobile spacing */
+        padding: 40px 20px;
     }
 
     .tutor-form-container {
