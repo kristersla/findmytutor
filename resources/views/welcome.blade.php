@@ -53,7 +53,7 @@
     <!-- LEFT: Landing Message -->
     <div class="w-full lg:w-1/2 flex flex-col justify-center items-center text-center px-6 lg:px-16 py-12 bg-gradient-to-br from-blue-100 to-blue-200">
         <h1 class="text-4xl font-extrabold text-blue-900 mb-4 leading-tight">Welcome to <span class="text-blue-700">FindMyTutor</span></h1>
-        <p class="text-lg text-blue-800 mb-6 max-w-lg">Empower your learning journey. Connect with top tutors, unlock new skills, and take the first step toward your goals today.</p>
+        
         <!-- <img src="{{ asset('images/hero-img.svg') }}" alt="Hero Image" class="w-full max-w-md"> -->
     </div>
 
