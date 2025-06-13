@@ -56,7 +56,7 @@ Route::middleware('auth')->group(function () {
 
         return TutorProfile::with('user')
             ->whereHas('user', function ($q) use ($query) {
-                $q->where('name', 'like', "%{$query}%"); // ← fix is here
+                $q->where('name', 'like', "%{$query}%");
             })
             ->take(5)
             ->get()

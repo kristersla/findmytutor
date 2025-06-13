@@ -35,6 +35,10 @@
             text-decoration: underline;
         }
 
+            .padd-fav{
+                padding-top: 8px;
+            }
+
         @media (max-width: 640px) {
             .dashboard-header {
                 font-size: 1.5rem;
@@ -56,6 +60,9 @@
             .summary-cards .card-custom p.text-2xl {
                 font-size: 1.5rem;
             }
+            .padd-fav{
+                padding-top: 27px;
+            }
         }
     </style>
 
@@ -69,7 +76,7 @@
         <div class="summary-cards flex flex-col sm:grid sm:grid-cols-3 gap-4 mb-16">
             <div class="card-custom text-center w-full sm:w-auto">
                 <p class="text-sm text-gray-500">Favorites</p>
-                <p class="text-2xl sm:text-3xl font-semibold text-blue-600 mt-7">{{ $favoriteTutors->count() }}</p>
+                <p class="text-2xl sm:text-3xl font-semibold text-blue-600 padd-fav">{{ $favoriteTutors->count() }}</p>
             </div>
             <div class="card-custom text-center w-full sm:w-auto">
                 <p class="text-sm text-gray-500">Student Sessions</p>
