@@ -15,7 +15,6 @@ class SessionController extends Controller
     {
         $validated = $request->validate([
             'datetime' => 'required|date|after:now',
-            'location' => 'required|string|max:255',
             'notes' => 'nullable|string',
         ]);
 
@@ -29,7 +28,6 @@ class SessionController extends Controller
             'student_user_id' => Auth::id(),
             'datetime' => $validated['datetime'],
             'status' => 'pending',
-            'location' => $validated['location'],
             'notes' => $validated['notes'],
         ]);
 
@@ -39,19 +37,19 @@ class SessionController extends Controller
     public function approve(Session $session)
     {
         $session->update(['status' => 'approved']);
-        return redirect()->route('sessions.dashboard')->with('success', 'Session approved.');
+        return redirect()->route('dashboard')->with('success', 'Session approved.');
     }
 
     public function reject(Session $session)
     {
         $session->update(['status' => 'rejected']);
-        return redirect()->route('sessions.dashboard')->with('success', 'Session rejected.');
+        return redirect()->route('dashboard')->with('success', 'Session rejected.');
     }
 
     public function cancel(Session $session)
     {
         $session->update(['status' => 'canceled']);
-        return redirect()->route('sessions.dashboard')->with('success', 'Session canceled.');
+        return redirect()->route('dashboard')->with('success', 'Session canceled.');
     }
 
     private function containsProfanity($text)

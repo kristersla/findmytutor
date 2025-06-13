@@ -1,167 +1,138 @@
 <x-app-layout>
-    <div class="dashboard-wrapper">
-        <div class="dashboard-header">
-            <h1>Welcome back, {{ Auth::user()->name }} 👋</h1>
-            <p>Your personalized dashboard overview.</p>
+    <style>
+        .card-custom {
+            border-radius: 1.25rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            background-color: #fff;
+            transition: transform 0.2s ease-in-out;
+        }
+        .card-custom:hover {
+            transform: translateY(-4px);
+        }
+        .fave-tutor{
+            background-color: #0000;
+        }
+        .btn-soft {
+            font-size: 0.875rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            color: #fff;
+            transition: background-color 0.3s ease;
+        }
+        .btn-yellow { background-color: #fbbf24; }
+        .btn-yellow:hover { background-color: #f59e0b; }
+        .btn-green { background-color: #10b981; }
+        .btn-green:hover { background-color: #059669; }
+        .btn-red { background-color: #ef4444; }
+        .btn-red:hover { background-color: #dc2626; }
+        .btn-link {
+            color: #3b82f6;
+            font-weight: 500;
+        }
+        .btn-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+    <div class="max-w-6xl mx-auto px-6 py-10 font-sans">
+        <div class="mb-12">
+            <h1 class="text-4xl font-bold text-gray-900">Welcome, {{ Auth::user()->name }} 👋</h1>
         </div>
 
-        <div class="summary-cards">
-            <div class="card">
-                <h3>Favorites</h3>
-                <p>{{ $favoriteTutors->count() }}</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-16">
+            <div class="card-custom text-center">
+                <p class="text-sm text-gray-500">Favorites</p>
+                <p class="text-3xl font-semibold text-blue-600 mt-2">{{ $favoriteTutors->count() }}</p>
             </div>
-            <div class="card">
-                <h3>Student Sessions</h3>
-                <p>{{ $studentSessions->count() }}</p>
+            <div class="card-custom text-center">
+                <p class="text-sm text-gray-500">Student Sessions</p>
+                <p class="text-3xl font-semibold text-blue-600 mt-2">{{ $studentSessions->count() }}</p>
             </div>
-            <div class="card">
-                <h3>Tutor Sessions</h3>
-                <p>{{ $tutorSessions->count() }}</p>
+            <div class="card-custom text-center">
+                <p class="text-sm text-gray-500">Tutor Sessions</p>
+                <p class="text-3xl font-semibold text-blue-600 mt-2">{{ $tutorSessions->count() }}</p>
             </div>
         </div>
 
-        <hr class="divider">
-
-        <section class="section">
-            <h2>My Favorite Tutors</h2>
+        <div class="fave-tutor">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">My Favorite Tutors</h2>
             @if($favoriteTutors->isEmpty())
-                <p class="text-muted">You haven't favorited any tutors yet.</p>
+                <p class="text-gray-400 italic">You haven't favorited any tutors yet.</p>
             @else
-                <div class="card-grid">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     @foreach($favoriteTutors as $tutor)
-                        <div class="card">
-                            <h3>{{ $tutor->user->name }}</h3>
-                            <p>{{ $tutor->bio }}</p>
-                            <a href="{{ route('tutors.show', $tutor->id) }}" class="btn-primary">View Profile</a>
+                        <div class="card-custom">
+                            <h3 class="text-lg font-semibold text-gray-800">{{ $tutor->user->name }}</h3>
+                            <p class="text-sm text-gray-500 mt-1">{{ $tutor->bio }}</p>
+                            <a href="{{ route('tutors.show', $tutor->id) }}" class="btn-link mt-4 inline-block">View Profile</a>
                         </div>
                     @endforeach
                 </div>
             @endif
-        </section>
-
-        <section class="section">
-            <h2>My Sessions</h2>
-
-            <div class="session-group">
-                <h3>As Student</h3>
-                @forelse ($studentSessions as $session)
-                    <div class="card session-card">
-                        <p><strong>Tutor:</strong> {{ $session->tutorProfile->user->name ?? 'N/A' }}</p>
-                        <p><strong>Date/Time:</strong> {{ $session->datetime }}</p>
-                        <p><strong>Status:</strong> {{ ucfirst($session->status) }}</p>
-                        @if ($session->session_id && in_array($session->status, ['pending', 'approved']))
-                            <form action="{{ route('sessions.cancel', $session->session_id) }}" method="POST">
-                                @csrf
-                                <button class="btn-warning">Cancel</button>
-                            </form>
-                        @endif
+        </div>
+        <br>
+        <div>
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">My Sessions</h2>
+            <div class="space-y-10">
+                @if ($studentSessions->isNotEmpty())
+                    <div>
+                        <h3 class="text-lg font-medium text-green-700 mb-2">As Student</h3>
+                        @foreach ($studentSessions as $session)
+                            <div class="card-custom">
+                                <p class="text-sm"><strong>Tutor:</strong> {{ $session->tutorProfile->user->name ?? 'N/A' }}</p>
+                                <p class="text-sm"><strong>Date/Time:</strong> {{ $session->datetime }}</p>
+                                <p class="text-sm"><strong>Status:</strong> {{ ucfirst($session->status) }}</p>
+                                @if ($session->session_id && in_array($session->status, ['pending', 'approved']))
+                                    <form action="{{ route('sessions.cancel', $session->session_id) }}" method="POST" class="mt-3">
+                                        @csrf
+                                        <button class="btn-soft btn-yellow">Cancel</button>
+                                    </form>
+                                @endif
+                            </div>
+                            <br>
+                        @endforeach
                     </div>
-                    <br>
-                @empty
-                    <p class="text-muted">No sessions booked as student.</p>
-                @endforelse
-            </div>
+                @else
+                    <p class="text-gray-400 italic">You haven't booked any sessions yet.</p>
+                @endif
 
-            <div class="session-group">
-                <h3>As Tutor</h3>
-                @forelse ($tutorSessions as $session)
-                    <div class="card session-card">
-                        <p><strong>Student:</strong> {{ $session->student->name ?? 'N/A' }}</p>
-                        <p><strong>Date/Time:</strong> {{ $session->datetime }}</p>
-                        <p><strong>Status:</strong> {{ ucfirst($session->status) }}</p>
-                        @if ($session->status === 'pending')
-                            <form action="{{ route('sessions.approve', ['session' => $session->session_id]) }}" method="POST">
-                                @csrf
-                                <button class="btn-success">Approve</button>
-                            </form>
-                            <form action="{{ route('sessions.reject', ['session' => $session->session_id]) }}" method="POST">
-                                @csrf
-                                <button class="btn-danger">Reject</button>
-                            </form>
-                        @endif
-                        @if ($session->id && in_array($session->status, ['pending', 'approved']))
-                            <form action="{{ route('sessions.cancel', $session->id) }}" method="POST">
-                                @csrf
-                                <button class="btn-warning">Cancel</button>
-                            </form>
-                        @endif
-                    </div>
-                @empty
-                    <p class="text-muted">No sessions booked as tutor.</p>
-                @endforelse
+                @if ($tutorSessions->isNotEmpty())
+                <div>
+                    <h3 class="text-lg font-medium text-green-700 mb-2">As Tutor</h3>
+                    @foreach ($tutorSessions as $session)
+                        <div class="card-custom">
+                            <p class="text-sm"><strong>Student:</strong> {{ $session->student->name ?? 'N/A' }}</p>
+                            <p class="text-sm"><strong>Date/Time:</strong> {{ $session->datetime }}</p>
+                            <p class="text-sm"><strong>Note:</strong> {{ ucfirst($session->notes) }}</p>
+                            <br>
+                            <p class="text-sm"><strong>Status:</strong> {{ ucfirst($session->status) }}</p>
+
+                            @if ($session->status === 'pending')
+                                <div class="flex gap-2 mt-3">
+                                    <form action="{{ route('sessions.approve', ['session' => $session->session_id]) }}" method="POST">
+                                        @csrf
+                                        <button class="btn-soft btn-green">Approve</button>
+                                    </form>
+                                    <form action="{{ route('sessions.reject', ['session' => $session->session_id]) }}" method="POST">
+                                        @csrf
+                                        <button class="btn-soft btn-red">Reject</button>
+                                    </form>
+                                </div>
+                            @endif
+                            @if ($session->id && in_array($session->status, ['pending', 'approved']))
+                                <form action="{{ route('sessions.cancel', $session->id) }}" method="POST" class="mt-3">
+                                    @csrf
+                                    <button class="btn-soft btn-yellow">Cancel</button>
+                                </form>
+                            @endif
+                        </div>
+                        <br>
+                    @endforeach
+                </div>
+                @endif
             </div>
-        </section>
+        </div>
     </div>
-
-    <style>
-        .dashboard-wrapper {
-            padding: 2rem 7rem;
-            background: #f9fafb;
-            font-family: 'Inter', sans-serif;
-        }
-        .dashboard-header h1 {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #111827;
-        }
-        .dashboard-header p {
-            color: #6b7280;
-        }
-        .summary-cards {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-        .card {
-            background: white;
-            border-radius: 1rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            padding: 1.5rem;
-            flex: 1;
-        }
-        .card h3 {
-            font-size: 1.25rem;
-            color: #2563eb;
-        }
-        .divider {
-            margin: 2rem 0;
-            border: none;
-            border-top: 1px solid #e5e7eb;
-        }
-        .section h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #1f2937;
-            margin-bottom: 1rem;
-        }
-        .text-muted {
-            color: #9ca3af;
-        }
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1rem;
-        }
-        .session-group h3 {
-            color: #047857;
-            margin-top: 1rem;
-            margin-bottom: 0.5rem;
-        }
-        .session-card button {
-            margin-top: 0.5rem;
-        }
-        .btn-primary, .btn-success, .btn-danger, .btn-warning {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem;
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: white;
-            text-align: center;
-        }
-        .btn-primary { background: #3b82f6; }
-        .btn-success { background: #10b981; }
-        .btn-danger { background: #ef4444; }
-        .btn-warning { background: #f59e0b; }
-    </style>
 </x-app-layout>

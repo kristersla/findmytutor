@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>FindMyTutor</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Instrument Sans', sans-serif;
+        html, body {
+            font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
         .half {
             width: 50%;
@@ -42,13 +43,17 @@
             width: 100%;
             max-width: 400px;
         }
+        .auth-hero-text{
+            font-weight: 600;
+            font-size: 20px;
+        }
     </style>
 </head>
 <body class="flex">
     <!-- LEFT: Landing Message -->
     <div class="w-full lg:w-1/2 flex flex-col justify-center items-center text-center px-6 lg:px-16 py-12 bg-gradient-to-br from-blue-100 to-blue-200">
         <h1 class="text-4xl font-extrabold text-blue-900 mb-4 leading-tight">Welcome to <span class="text-blue-700">FindMyTutor</span></h1>
-        <p class="text-lg text-blue-800 mb-6 max-w-lg">Discover expert tutors across subjects. Log in or sign up to book your first session and start learning today.</p>
+        <p class="text-lg text-blue-800 mb-6 max-w-lg">Empower your learning journey. Connect with top tutors, unlock new skills, and take the first step toward your goals today.</p>
         <!-- <img src="{{ asset('images/hero-img.svg') }}" alt="Hero Image" class="w-full max-w-md"> -->
     </div>
 
@@ -64,7 +69,9 @@
             @endif
 
             {{-- Login Form --}}
+            
             <div id="login-form" class="space-y-4">
+                <h1 class="auth-hero-text">Log in</h1>
                 <form method="POST" action="{{ route('login') }}" class="space-y-5">
                     @csrf
                     <div>
@@ -94,6 +101,7 @@
 
             {{-- Register Form --}}
             <div id="register-form" class="space-y-4 hidden">
+                <h1 class="auth-hero-text">Register account</h1>
                 <form method="POST" action="{{ route('register') }}" class="space-y-5">
                     @csrf
                     <div>

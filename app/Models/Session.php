@@ -9,10 +9,10 @@ class Session extends Model
 {
     use HasFactory;
 
-    protected $table = 'sessions';              // Make sure this is set
-    protected $primaryKey = 'session_id';       // Very important
-    public $incrementing = true;                // Needed so Laravel uses auto-increment
-    protected $keyType = 'int';                 // Ensure it treats the key as an integer
+    protected $table = 'sessions';
+    protected $primaryKey = 'session_id';
+    public $incrementing = true;
+    protected $keyType = 'int';
 
     protected $fillable = [
         'tutor_profile_id',
@@ -20,7 +20,6 @@ class Session extends Model
         'datetime',
         'duration',
         'status',
-        'location',
         'notes'
     ];
 
