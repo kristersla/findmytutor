@@ -119,7 +119,7 @@
                                 @if ($session->session_id && in_array($session->status, ['pending', 'approved']))
                                     <form action="{{ route('sessions.cancel', $session->session_id) }}" method="POST" class="mt-3">
                                         @csrf
-                                        
+                                        <button class="btn-soft btn-yellow">Cancel</button>
                                     </form>
                                 @endif
                             </div>
