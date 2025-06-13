@@ -9,68 +9,102 @@
 
     <style>
         html, body {
-            font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: row;
+            height: 100vh;
         }
-        .half {
-            width: 50%;
-            min-height: 100vh;
-        }
+
         .left-side {
-            background: linear-gradient(to bottom right, #1d4ed8, #2563eb);
-            color: white;
+            width: 50%;
+            background: linear-gradient(to bottom right, #bfdbfe, #dbeafe);
+            color: #1e3a8a;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 4rem;
             text-align: center;
+            padding: 4rem 2rem;
         }
+
         .left-side h1 {
             font-size: 3rem;
             font-weight: 800;
         }
+
         .left-side p {
             font-size: 1.125rem;
             margin-top: 1rem;
             max-width: 400px;
         }
+
         .right-side {
+            width: 50%;
+            background: white;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 2rem;
         }
+
         .auth-box {
             width: 100%;
             max-width: 400px;
         }
-        .auth-hero-text{
+
+        .auth-hero-text {
             font-weight: 600;
             font-size: 20px;
         }
+
+        @media (max-width: 768px) {
+            html, body {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .left-side,
+            .right-side {
+                width: 100% !important;
+                padding: 2rem 1.5rem;
+            }
+
+            .left-side h1 {
+                font-size: 2rem;
+            }
+
+            .left-side p {
+                font-size: 1rem;
+            }
+
+            .auth-box,
+            #auth-container {
+                max-width: 100%;
+            }
+        }
     </style>
 </head>
-<body class="flex">
-    <!-- LEFT: Landing Message -->
-    <div class="w-full lg:w-1/2 flex flex-col justify-center items-center text-center px-6 lg:px-16 py-12 bg-gradient-to-br from-blue-100 to-blue-200">
-        <h1 class="text-4xl font-extrabold text-blue-900 mb-4 leading-tight">Welcome to <span class="text-blue-700">FindMyTutor</span></h1>
-        <p class="text-lg text-blue-800 mb-6 max-w-lg">Empower your learning journey. Connect with top tutors, unlock new skills, and take the first step toward your goals today.</p>
-        <!-- <img src="{{ asset('images/hero-img.svg') }}" alt="Hero Image" class="w-full max-w-md"> -->
+<body>
+
+    <!-- LEFT: Welcome Section -->
+    <div class="left-side">
+        <h1>Welcome to <span class="text-blue-700">FindMyTutor</span></h1>
+        <p>Empower your learning journey. Connect with top tutors, unlock new skills, and take the first step toward your goals today.</p>
     </div>
 
-
     <!-- RIGHT: Auth Forms -->
-    <div class="half right-side flex justify-center items-center bg-white px-6 py-12">
-        <div id="auth-container" class="w-full max-w-md space-y-8">
-            {{-- Session Status --}}
+    <div class="right-side">
+        <div id="auth-container" class="auth-box space-y-8">
+
             @if (session('status'))
                 <div class="text-sm text-green-600 font-medium text-center">
                     {{ session('status') }}
                 </div>
             @endif
 
-            {{-- Login Form --}}
-            
+            <!-- Login Form -->
             <div id="login-form" class="space-y-4">
                 <h1 class="auth-hero-text">Log in</h1>
                 <form method="POST" action="{{ route('login') }}" class="space-y-5">
@@ -100,7 +134,7 @@
                 </p>
             </div>
 
-            {{-- Register Form --}}
+            <!-- Register Form -->
             <div id="register-form" class="space-y-4 hidden">
                 <h1 class="auth-hero-text">Register account</h1>
                 <form method="POST" action="{{ route('register') }}" class="space-y-5">
@@ -147,26 +181,16 @@
         function toggleAuth(form) {
             const loginForm = document.getElementById('login-form');
             const registerForm = document.getElementById('register-form');
-            const loginBtn = document.getElementById('login-btn');
-            const registerBtn = document.getElementById('register-btn');
-
-            const active = 'bg-blue-600 text-white';
-            const inactive = 'bg-gray-200 text-gray-700';
 
             if (form === 'login') {
                 loginForm.classList.remove('hidden');
                 registerForm.classList.add('hidden');
-                loginBtn.className = loginBtn.className.replace(inactive, active);
-                registerBtn.className = registerBtn.className.replace(active, inactive);
             } else {
                 loginForm.classList.add('hidden');
                 registerForm.classList.remove('hidden');
-                registerBtn.className = registerBtn.className.replace(inactive, active);
-                loginBtn.className = loginBtn.className.replace(active, inactive);
             }
         }
     </script>
-
 
 </body>
 </html>

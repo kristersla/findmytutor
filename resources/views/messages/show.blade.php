@@ -8,27 +8,32 @@
         background: #ffffff;
         border-radius: 1rem;
         padding: 2rem;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
-    .hero-text{
+
+    .hero-text {
         text-align: center;
         font-size: 20px;
         padding-bottom: 10px;
     }
+
     .chat-bubble {
         margin-bottom: 1rem;
         padding: 1rem;
         border-radius: 0.5rem;
         background-color: #f3f4f6;
     }
+
     .chat-sender {
         font-weight: bold;
         color: #374151;
     }
+
     .chat-meta {
         font-size: 0.875rem;
         color: #9ca3af;
     }
+
     .chat-form textarea {
         width: 100%;
         padding: 0.75rem;
@@ -36,6 +41,7 @@
         border-radius: 0.5rem;
         resize: vertical;
     }
+
     .chat-form button {
         margin-top: 0.75rem;
         background-color: #3b82f6;
@@ -46,8 +52,15 @@
         border-radius: 0.375rem;
         transition: background 0.3s;
     }
+
     .chat-form button:hover {
         background-color: #2563eb;
+    }
+
+    @media (max-width: 768px) {
+        .chat-container {
+            margin: 2rem 1rem;
+        }
     }
 </style>
 

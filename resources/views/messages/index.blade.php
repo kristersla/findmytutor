@@ -2,33 +2,44 @@
 
 @section('content')
 <style>
-    .hero-text{
+    .hero-text {
         text-align: center;
         font-weight: 600;
         font-size: 20px;
     }
+
     .conversation-container {
         max-width: 700px;
         margin: 2rem auto;
         background: #ffffff;
         border-radius: 1rem;
         padding: 2rem;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
+
     .message-preview {
         padding: 1rem;
         border-bottom: 1px solid #e5e7eb;
         transition: background 0.2s;
     }
+
     .message-preview:hover {
         background-color: #f9fafb;
     }
+
     .message-preview strong {
         font-size: 1rem;
         color: #1f2937;
     }
+
     .message-preview small {
         color: #6b7280;
+    }
+    
+    @media (max-width: 768px) {
+        .conversation-container {
+            margin: 2rem 1rem;
+        }
     }
 </style>
 
