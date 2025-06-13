@@ -10,7 +10,7 @@
         .card-custom:hover {
             transform: translateY(-4px);
         }
-        .fave-tutor{
+        .fave-tutor {
             background-color: #0000;
         }
         .btn-soft {
@@ -34,25 +34,50 @@
         .btn-link:hover {
             text-decoration: underline;
         }
+
+        @media (max-width: 640px) {
+            .dashboard-header {
+                font-size: 1.5rem;
+                text-align: center;
+            }
+
+            .summary-cards {
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: space-between;
+                gap: 0.5rem;
+            }
+
+            .summary-cards .card-custom {
+                flex: 1 1 30%;
+                padding: 1rem;
+            }
+
+            .summary-cards .card-custom p.text-2xl {
+                font-size: 1.5rem;
+            }
+        }
     </style>
 
     <div class="max-w-6xl mx-auto px-6 py-10 font-sans">
-        <div class="mb-12">
-            <h1 class="text-4xl font-bold text-gray-900">Welcome, {{ Auth::user()->name }} 👋</h1>
+        <div class="mb-6">
+            <h1 class="dashboard-header text-2xl sm:text-4xl font-bold text-gray-900 truncate">
+                Welcome, {{ Auth::user()->name }} 👋
+            </h1>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-16">
-            <div class="card-custom text-center">
+        <div class="summary-cards flex flex-col sm:grid sm:grid-cols-3 gap-4 mb-16">
+            <div class="card-custom text-center w-full sm:w-auto">
                 <p class="text-sm text-gray-500">Favorites</p>
-                <p class="text-3xl font-semibold text-blue-600 mt-2">{{ $favoriteTutors->count() }}</p>
+                <p class="text-2xl sm:text-3xl font-semibold text-blue-600 mt-7">{{ $favoriteTutors->count() }}</p>
             </div>
-            <div class="card-custom text-center">
+            <div class="card-custom text-center w-full sm:w-auto">
                 <p class="text-sm text-gray-500">Student Sessions</p>
-                <p class="text-3xl font-semibold text-blue-600 mt-2">{{ $studentSessions->count() }}</p>
+                <p class="text-2xl sm:text-3xl font-semibold text-blue-600 mt-2">{{ $studentSessions->count() }}</p>
             </div>
-            <div class="card-custom text-center">
+            <div class="card-custom text-center w-full sm:w-auto">
                 <p class="text-sm text-gray-500">Tutor Sessions</p>
-                <p class="text-3xl font-semibold text-blue-600 mt-2">{{ $tutorSessions->count() }}</p>
+                <p class="text-2xl sm:text-3xl font-semibold text-blue-600 mt-2">{{ $tutorSessions->count() }}</p>
             </div>
         </div>
 

@@ -7,7 +7,14 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    
+    <style>
+        html, body {
+            font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        .half {
+            width: 50%;
+            min-height: 100vh;
+        }
         .left-side {
             background: linear-gradient(to bottom right, #1d4ed8, #2563eb);
             color: white;
