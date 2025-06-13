@@ -92,9 +92,9 @@
             </x-responsive-nav-link>
             @auth
                 @if (Auth::user()->tutorProfile)
-                        <x-nav-link :href="route('availability.index')" :active="request()->routeIs('availability.index')">
+                        <x-responsive-nav-link :href="route('availability.index')" :active="request()->routeIs('availability.index')">
                             {{ __('My Availability') }}
-                        </x-nav-link>
+                        </x-responsive-nav-link>
                     @endif
                 @endauth
             @auth
