@@ -9,28 +9,34 @@
     }
 
     .tutor-form-wrapper {
-        background-color: #f3f4f6; /* Light gray background instead of image */
+        background-color: #f3f4f6;
         min-height: 93vh;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 0;
+        padding: 40px 20px; /* padding added for mobile spacing */
     }
 
     .tutor-form-container {
         background: white;
         padding: 30px 40px;
-        border-radius: 10px;
-        box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
         max-width: 600px;
         width: 100%;
+    }
+
+    @media (max-width: 768px) {
+        .tutor-form-container {
+            padding: 20px 20px;
+        }
     }
 
     .tutor-form-container h2 {
         text-align: center;
         margin-bottom: 20px;
         font-weight: bold;
-        font-size: 20px
+        font-size: 20px;
     }
 
     .form-group {
@@ -52,7 +58,7 @@
     }
 
     .btn-submit {
-        background-color:rgb(88, 123, 218);
+        background-color: rgb(88, 123, 218);
         color: white;
         border: none;
         padding: 12px 24px;
@@ -106,6 +112,7 @@
                 <option value="geography">Geography</option>
             </select>
         </div>
+
         <button type="submit" class="btn-submit">Create Tutor Profile</button>
     </form>
 </div>

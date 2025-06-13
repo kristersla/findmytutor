@@ -11,6 +11,13 @@
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
     }
 
+    @media (max-width: 768px) {
+        .availability-wrapper {
+            margin: 20px 16px;
+            padding: 20px;
+        }
+    }
+
     h2 {
         text-align: center;
         font-weight: bold;
@@ -32,7 +39,7 @@
     }
 
     .btn-primary {
-        background-color:rgba(89, 131, 247, 0.63);
+        background-color: rgba(89, 131, 247, 0.63);
         border: none;
         font-weight: 600;
         padding: 12px;
@@ -74,7 +81,7 @@
     }
 
     .btn-outline-danger {
-        background-color:rgba(189, 57, 57, 0.9); /* Tailwind red-500 */
+        background-color: rgba(189, 57, 57, 0.9);
         color: white;
         border: none;
         padding: 6px 16px;
@@ -83,8 +90,9 @@
         font-weight: 600;
         transition: background-color 0.2s ease;
     }
+
     .btn-outline-danger:hover {
-        background-color: rgba(146, 43, 43, 0.9) /* Tailwind red-600 */
+        background-color: rgba(146, 43, 43, 0.9);
     }
 
     .form-row {
